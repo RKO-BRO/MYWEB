@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIPER-RKO | CYBER HUB</title>
+    <title>VAJIRA-MD & VIPER RKO CORE</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --neon-green: #00ff66;
+            --neon-red: #ff0055;
             --neon-cyan: #00f0ff;
-            --bg-dark: #030303;
-            --card-bg: rgba(10, 12, 10, 0.85);
-            --glow-green: 0 0 15px rgba(0, 255, 102, 0.3);
-            --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.3);
+            --bg-dark: #050505;
+            --card-bg: rgba(12, 12, 15, 0.9);
+            --glow-red: 0 0 20px rgba(255, 0, 85, 0.4);
+            --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.4);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Consolas', 'Courier New', monospace, sans-serif;
         }
 
         body {
@@ -29,531 +29,458 @@
             overflow-x: hidden;
         }
 
-        /* Matrix Animated Background Canvas */
+        /* Hacker Matrix Code Rain Canvas */
         canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.12;
+            opacity: 0.15;
             pointer-events: none;
         }
 
-        /* Tech Scanline Overlay */
-        body::before {
-            content: " ";
-            display: block;
+        /* GLOBAL TOP BAR */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--neon-red);
+            box-shadow: var(--glow-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .logo span { color: var(--neon-red); }
+
+        .menu-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            font-size: 1.3rem;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .menu-toggle-btn:hover {
+            background: var(--neon-red);
+            color: #000;
+            box-shadow: var(--glow-red);
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
-            z-index: 9999;
-            pointer-events: none;
-            background-size: 100% 4px;
+            top: 0; left: -300px;
+            width: 300px; height: 100%;
+            background: rgba(5, 5, 5, 0.98);
+            border-right: 2px solid var(--neon-red);
+            box-shadow: 5px 0 25px rgba(255, 0, 85, 0.3);
+            z-index: 200;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 30px 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            transition: all 0.5s ease;
+        .sidebar.open { left: 0; }
+
+        .close-sidebar {
+            text-align: right;
+            font-size: 1.5rem;
+            color: var(--neon-red);
+            cursor: pointer;
+            margin-bottom: 40px;
         }
 
-        /* Active View Systems */
-        .view-section {
-            display: none;
-        }
-
-        .view-section.active {
-            display: block;
-            animation: terminalFade 0.6s ease forwards;
-        }
-
-        @keyframes terminalFade {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* HEADER */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 255, 102, 0.2);
-            border-radius: 16px;
-            box-shadow: var(--glow-green);
-            backdrop-filter: blur(10px);
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px var(--neon-green);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.95rem;
-        }
-
-        .category-title {
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 40px 0 25px 0;
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 20px; }
+        .sidebar-menu li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            color: #fff;
+            background: rgba(255, 0, 85, 0.15);
+            border-left: 4px solid var(--neon-red);
+            text-shadow: 0 0 8px var(--neon-red);
         }
 
-        .cyan-title { color: var(--neon-cyan); }
-        .green-title { color: var(--neon-green); }
+        /* VIEW CONTAINER */
+        .app-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
-        .grid {
+        .view-section { display: none; }
+        .view-section.active-view {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ----------------------------------
+           PAGE 1: INITIAL LANGUAGE SELECTOR 
+           ---------------------------------- */
+        .lang-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lang-card {
+            background: #0d0d13;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+        }
+
+        .lang-card h2 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .lang-card p { color: #888; font-size: 0.9rem; margin-bottom: 35px; }
+
+        .lang-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media(max-width: 480px) { .lang-grid { grid-template-columns: 1fr; } }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .lang-btn img { width: 24px; height: 16px; object-fit: cover; border-radius: 2px; }
+
+        /* -------------------------
+           PAGE 2: MAIN DASHBOARD 
+           ------------------------- */
+        .hero-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-red);
+            box-shadow: var(--glow-red);
+            border-radius: 16px;
+            padding: 45px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-banner h1 { font-size: 3rem; color: #fff; margin-bottom: 10px; letter-spacing: 3px; }
+        .hero-banner p { color: #aaa; margin-bottom: 30px; line-height: 1.6; }
+
+        .connect-btn {
+            background: var(--neon-red);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: var(--glow-red);
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .connect-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        .pair-box {
+            background: #09090d;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pair-box h3 { margin-bottom: 15px; color: var(--neon-cyan); }
+        .phone-input-wrap { display: flex; gap: 10px; margin-bottom: 20px; }
+        .phone-input-wrap span { background: #15151f; padding: 12px; border: 1px solid #333; border-radius: 6px; }
+        .phone-input-wrap input { flex: 1; background: #000; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 6px; outline: none; }
+        .phone-input-wrap input:focus { border-color: var(--neon-cyan); }
+
+        .code-btn {
+            width: 100%; background: transparent; border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan); padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .code-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: var(--glow-cyan); }
+
+        /* -------------------------
+           PAGE 3: PREMIUM CYBER STORE
+           ------------------------- */
+        .store-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .store-header h2 { font-size: 2.5rem; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+        .store-header p { color: #666; }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* MAIN APP CARDS */
-        .cyber-card {
+        .store-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.2);
             border-radius: 16px;
             padding: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: 0.3s;
         }
-
-        .cyber-card.cyan-theme:hover {
+        .store-card:hover {
             border-color: var(--neon-cyan);
             box-shadow: var(--glow-cyan);
             transform: translateY(-5px);
         }
 
-        .cyber-card.green-theme:hover {
-            border-color: var(--neon-green);
-            box-shadow: var(--glow-green);
-            transform: translateY(-5px);
+        .item-price {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 15px 0;
+            font-weight: bold;
         }
+        .item-price span { color: var(--neon-cyan); font-size: 1rem; }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 12px;
-        }
-
-        .card-header h3 { font-size: 1.4rem; font-weight: 700; }
-        .cyan-theme .card-header h3 { text-shadow: 0 0 8px var(--neon-cyan); }
-        .green-theme .card-header h3 { text-shadow: 0 0 8px var(--neon-green); }
-
-        .card-icon { font-size: 1.8rem; }
-        .cyan-theme .card-icon { color: var(--neon-cyan); }
-        .green-theme .card-icon { color: var(--neon-green); }
-
-        .card-desc { color: #aaa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
-
-        /* FEATURES LIST (Vajira-MD Architecture) */
-        .features-list { margin-bottom: 25px; list-style: none; }
-        .features-list li { font-size: 0.9rem; color: #d1d1d1; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .cyan-theme .features-list li i { color: var(--neon-cyan); }
-        .green-theme .features-list li i { color: var(--neon-green); }
-
-        .status-display { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
-        .cyan-theme .status-display { color: var(--neon-cyan); }
-        .green-theme .status-display { color: var(--neon-green); }
-
-        /* BUTTON INTERACTIVITY */
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
             padding: 12px;
             border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-        }
-
-        .cyan-theme .action-btn { border: 1px solid var(--neon-cyan); color: var(--neon-cyan); }
-        .cyan-theme .action-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 10px var(--neon-cyan); }
-
-        .green-theme .action-btn { border: 1px solid var(--neon-green); color: var(--neon-green); }
-        .green-theme .action-btn:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 10px var(--neon-green); }
-
-        /* =========================================================
-           ADVANCED DYNAMIC INTERACTIVE TERMINAL (PAIRING PANEL)
-           ========================================================= */
-        .pairing-panel {
-            background: rgba(5, 7, 5, 0.95);
-            border: 2px solid var(--neon-cyan);
-            box-shadow: var(--glow-cyan);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 20px; left: 20px;
-            background: transparent;
-            border: 1px solid #ff3333;
-            color: #ff3333;
-            padding: 6px 14px;
-            border-radius: 6px;
+            width: 100%;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.85rem;
             transition: 0.3s;
         }
-        .back-btn:hover { background: #ff3333; color: #000; }
-
-        .pairing-panel h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px var(--neon-cyan);
-            letter-spacing: 2px;
-        }
-
-        .pairing-panel p.subtitle {
-            color: #77aacc;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            color: var(--neon-cyan);
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            background: #000;
-            border: 1px solid var(--neon-cyan);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            outline: none;
-            font-family: monospace;
-        }
-
-        .input-group input:focus {
-            box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.4);
-        }
-
-        /* Live Response Logic Modules */
-        .terminal-console {
-            background: #000;
-            border: 1px dashed rgba(0, 240, 255, 0.3);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 25px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .code-output {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 5px;
-            color: #fff;
-            text-shadow: 0 0 12px var(--neon-cyan);
-            display: none;
-        }
-
-        /* Loading Spinner Animation */
-        .spinner {
-            display: none;
-            border: 4px solid rgba(0, 240, 255, 0.1);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border-left-color: var(--neon-cyan);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        footer {
-            margin-top: 60px;
-            text-align: center;
-            padding: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #555;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+        .buy-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
         }
     </style>
 </head>
 <body>
 
-    <!-- Canvas background node code rain layer -->
-    <canvas id="matrixEnv"></canvas>
+    <!-- Canvas matrix backdrop -->
+    <canvas id="canvasRain"></canvas>
 
-    <div class="container">
-
-        <!-- ==========================================
-             VIEW 1: THE CORE MARKETPLACE DASHBOARD
-             ========================================== -->
-        <div id="marketView" class="view-section active">
-            <header>
-                <h1>VIPER-RKO</h1>
-                <p>Architectural Custom WhatsApp Automation Framework</p>
-            </header>
-
-            <!-- BOTS ENGINE PANEL -->
-            <div class="category-title cyan-title">
-                <i class="fa-solid fa-terminal"></i> <h2>Viper Official Bots</h2>
+    <!-- 10 LANGUAGES SELECTOR OVERLAY -->
+    <div class="lang-overlay" id="langOverlay">
+        <div class="lang-card">
+            <h2>✨ Welcome to Cyber Hub</h2>
+            <p>Select your preferred language to initialize infrastructure</p>
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="selectLanguage('Sinhala')"><img src="https://flagcdn.com/w40/lk.png"> සිංහල (Sinhala)</button>
+                <button class="lang-btn" onclick="selectLanguage('English')"><img src="https://flagcdn.com/w40/us.png"> English</button>
+                <button class="lang-btn" onclick="selectLanguage('Tamil')"><img src="https://flagcdn.com/w40/in.png"> தமிழ் (Tamil)</button>
+                <button class="lang-btn" onclick="selectLanguage('Arabic')"><img src="https://flagcdn.com/w40/sa.png"> العربية (Arabic)</button>
+                <button class="lang-btn" onclick="selectLanguage('Russian')"><img src="https://flagcdn.com/w40/ru.png"> Русский (Russian)</button>
+                <button class="lang-btn" onclick="selectLanguage('Spanish')"><img src="https://flagcdn.com/w40/es.png"> Español (Spanish)</button>
+                <button class="lang-btn" onclick="selectLanguage('Portuguese')"><img src="https://flagcdn.com/w40/br.png"> Português</button>
+                <button class="lang-btn" onclick="selectLanguage('Hindi')"><img src="https://flagcdn.com/w40/in.png"> हिन्दी (Hindi)</button>
+                <button class="lang-btn" onclick="selectLanguage('Indonesian')"><img src="https://flagcdn.com/w40/id.png"> Indonesia</button>
+                <button class="lang-btn" onclick="selectLanguage('Urdu')"><img src="https://flagcdn.com/w40/pk.png"> اردو (Urdu)</button>
             </div>
-            
-            <div class="grid">
-                <!-- BOT 1 -->
-                <div class="cyber-card cyan-theme">
+        </div>
+    </div>
+
+    <!-- GLOBAL TOP NAVBAR -->
+    <nav class="top-navbar">
+        <div class="logo">VAJIRA-<span>MD</span></div>
+        <button class="menu-toggle-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i> MENU</button>
+    </nav>
+
+    <!-- SIDEBAR DRAWER MENU -->
+    <div class="sidebar" id="sidebarMenu">
+        <div class="close-sidebar" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i> CLOSE</div>
+        <ul class="sidebar-menu">
+            <li><a onclick="switchPage('homePage')" id="link-homePage" class="active"><i class="fa-solid fa-house"></i> Home Core</a></li>
+            <li><a onclick="switchPage('storePage')" id="link-storePage"><i class="fa-solid fa-shop"></i> Cyber Store</a></li>
+            <li><a onclick="alert('Configuration panel coming soon!')"><i class="fa-solid fa-gears"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN INTERACTIVE APP PAGE ROUTER CONTAINER -->
+    <div class="app-container">
+
+        <!-- PAGE 1: CORE HOME VIEW -->
+        <div id="homePage" class="view-section active-view">
+            <div class="hero-banner">
+                <h1>VAJIRA-MD LITE</h1>
+                <p>Multi-Device WhatsApp Bot Automation Platform. Inject session tokens instantly.</p>
+                <button class="connect-btn" onclick="document.getElementById('pairEngine').scrollIntoView({behavior: 'smooth'})">Connect Bot Engine</button>
+            </div>
+
+            <div class="pair-box" id="pairEngine">
+                <h3><i class="fa-solid fa-key"></i> Link via Pairing Code</h3>
+                <div class="phone-input-wrap">
+                    <span>+94</span>
+                    <input type="text" placeholder="Enter phone number without 0">
+                </div>
+                <button class="code-btn" onclick="alert('Generating System Pairing Code... Please Wait')">Get Pairing Code</button>
+            </div>
+        </div>
+
+        <!-- PAGE 2: PREMIUM STORE VIEW -->
+        <div id="storePage" class="view-section">
+            <div class="store-header">
+                <h2>⚡ CYBER REPOSITORY STORE</h2>
+                <p>Acquire paid premium script automation architecture keys</p>
+            </div>
+
+            <div class="store-grid">
+                <!-- Item 1 -->
+                <div class="store-card">
                     <div>
-                        <div class="card-header">
-                            <h3>THE_VIPER-MD</h3>
-                            <i class="fa-solid fa-robot card-icon"></i>
-                        </div>
-                        <p class="card-desc">Advanced fully-automated multi-device module core system.</p>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-circle-check"></i> 250+ Functional Commands</li>
-                            <li><i class="fa-solid fa-circle-check"></i> AI Chat Engine Injected</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Cloud Storage Connected</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Absolute Anti-Ban Architecture</li>
-                        </ul>
+                        <h3>Vajira Multi-Core Pro V4</h3>
+                        <p style="color: #888; margin-top: 10px; font-size: 0.9rem;">Full premium package with complete tracking bypass and AI integration capabilities.</p>
                     </div>
                     <div>
-                        <div class="status-display">METHOD: PAIR ENGINE</div>
-                        <!-- JavaScript Trigger Click Event -->
-                        <button class="action-btn" onclick="openPairingGate('THE_VIPER-MD')">
-                            Initialize Pairing <i class="fa-solid fa-code-branch"></i>
-                        </button>
+                        <div class="item-price">LKR 2,500<span>/Lifetime</span></div>
+                        <button class="buy-btn" onclick="alert('Redirecting securely to checkout gateway...')">Purchase License Key</button>
                     </div>
                 </div>
-
-                <!-- BOT 2 -->
-                <div class="cyber-card cyan-theme">
+                <!-- Item 2 -->
+                <div class="store-card">
                     <div>
-                        <div class="card-header">
-                            <h3>VIPER-MINI</h3>
-                            <i class="fa-solid fa-microchip card-icon"></i>
-                        </div>
-                        <p class="card-desc">Ultra lightweight, optimized build for minimal process engines.</p>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-circle-check"></i> Ultra Low RAM Utilization</li>
-                            <li><i class="fa-solid fa-circle-check"></i> 24/7 Persistent Up-time</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Core Utility Toolkit Included</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Single Script Control</li>
-                        </ul>
+                        <h3>Anti-Ban Multi-Device Plugin</h3>
+                        <p style="color: #888; margin-top: 10px; font-size: 0.9rem;">Advanced proxy rotation layer to keep your corporate system safe from limits.</p>
                     </div>
                     <div>
-                        <div class="status-display">METHOD: PAIR ENGINE</div>
-                        <button class="action-btn" onclick="openPairingGate('VIPER-MINI')">
-                            Initialize Pairing <i class="fa-solid fa-code-branch"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CODE BASES PANEL -->
-            <div class="category-title green-title">
-                <i class="fa-solid fa-code"></i> <h2>Developer Bot Bases</h2>
-            </div>
-            <div class="grid">
-                <div class="cyber-card green-theme">
-                    <div>
-                        <div class="card-header">
-                            <h3>ViperBase-X Core</h3>
-                            <i class="fa-solid fa-layer-group card-icon"></i>
-                        </div>
-                        <p class="card-desc">Clean structured modular Javascript framework layout for automation.</p>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-circle-check"></i> Clean JavaScript Modules</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Event Emitter Control</li>
-                            <li><i class="fa-solid fa-circle-check"></i> Quick Session Save</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div class="status-display">PRICE: LKR 2,000.00</div>
-                        <button class="action-btn" onclick="alert('System Notice: Base source purchasing will be configured soon!')">
-                            Get Source Code <i class="fa-solid fa-lock-open"></i>
-                        </button>
+                        <div class="item-price">LKR 1,200<span>/License</span></div>
+                        <button class="buy-btn" onclick="alert('Redirecting securely to checkout gateway...')">Purchase License Key</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- ==========================================
-             VIEW 2: DYNAMIC PAIRING TERMINAL CONTROL
-             ========================================== -->
-        <div id="pairingView" class="view-section">
-            <div class="pairing-panel">
-                <button class="back-btn" onclick="closePairingGate()"><i class="fa-solid fa-arrow-left"></i> ESCAPE</button>
-                
-                <h2 id="targetBotTitle">BOT_NAME</h2>
-                <p class="subtitle">ENTER TARGET PHONE NUMBER WITH COUNTRY CODE TO INJECT SESSION</p>
-
-                <div class="input-group">
-                    <label for="phoneNumber">PHONE NUMBER (e.g., 94771234567)</label>
-                    <input type="text" id="phoneNumber" placeholder="94xxxxxxxx" autocomplete="off">
-                </div>
-
-                <button class="action-btn" style="border: 1px solid var(--neon-cyan); color: var(--neon-cyan);" onclick="generatePairCodeProcess()">
-                    SUBMIT TO SYSTEM CORE
-                </button>
-
-                <div class="terminal-console">
-                    <div id="terminalStatus" style="color: #666; font-size: 0.9rem;">AWAITING SECURITY INJECTION...</div>
-                    <div class="spinner" id="loadingSpinner"></div>
-                    <div class="code-output" id="finalPairCode">XXXX-XXXX</div>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>CORE GATEWAY SECURED // PROTOCOL RKO v4.0 // &copy; 2026</p>
-        </footer>
 
     </div>
 
-    <!-- Core Interactive Client Script Architecture -->
     <script>
-        // SINGLE-PAGE ROUTING LOGIC
-        function openPairingGate(botName) {
-            document.getElementById('marketView').classList.remove('active');
-            document.getElementById('pairingView').classList.add('active');
-            document.getElementById('targetBotTitle').innerText = `[ ${botName} PAIR PROTOCOL ]`;
+        // LANGUAGE SELECTION CLOSER
+        function selectLanguage(lang) {
+            console.log("Language Selected: " + lang);
+            document.getElementById('langOverlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('langOverlay').style.display = 'none';
+            }, 400);
+        }
+
+        // SIDEBAR CORE CONTROLLER
+        function toggleSidebar() {
+            document.getElementById('sidebarMenu').classList.toggle('open');
+        }
+
+        // CLIENT SINGLE-PAGE APPLICATION INTER-PAGE ROUTER
+        function switchPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            // Show active page
+            document.getElementById(pageId).classList.add('active-view');
+
+            // Toggle links color states
+            document.querySelectorAll('.sidebar-menu li a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById('link-' + pageId).classList.add('active');
             
-            // Clear previous session states
-            document.getElementById('phoneNumber').value = "";
-            document.getElementById('finalPairCode').style.display = "none";
-            document.getElementById('terminalStatus').style.display = "block";
-            document.getElementById('terminalStatus').innerText = "AWAITING SECURITY INJECTION...";
-            document.getElementById('terminalStatus').style.color = "#666";
+            // Auto close drawer menu
+            toggleSidebar();
         }
 
-        function closePairingGate() {
-            document.getElementById('pairingView').classList.remove('active');
-            document.getElementById('marketView').classList.add('active');
-        }
-
-        // SIMULATED INTERACTIVE PAIR INTERFACE
-        function generatePairCodeProcess() {
-            const numInput = document.getElementById('phoneNumber').value.trim();
-            const statusText = document.getElementById('terminalStatus');
-            const spinner = document.getElementById('loadingSpinner');
-            const codeOutput = document.getElementById('finalPairCode');
-
-            if(!numInput || numInput.length < 8) {
-                statusText.innerText = "ERROR: INVALID PROTOCOL TARGET IDENTIFIER (NUMBER TOO SHORT).";
-                statusText.style.color = "#ff3333";
-                codeOutput.style.display = "none";
-                return;
-            }
-
-            // Begin dynamic UI state transitions
-            statusText.innerText = "CONNECTING TO WHATSAPP SERVER CORE VIA BAILEYS...";
-            statusText.style.color = varColor('--neon-cyan');
-            spinner.style.display = "block";
-            codeOutput.style.display = "none";
-
-            // State step 2: 1.5 seconds later
-            setTimeout(() => {
-                statusText.innerText = "GENERATING PRIVATE ENCRYPTED SESSION KEY & PAIR PATTERN...";
-            }, 1500);
-
-            // State step 3: Final Resolution (3.5 seconds total)
-            setTimeout(() => {
-                spinner.style.display = "none";
-                statusText.style.display = "none";
-                
-                // Generates a mock professional terminal alphanumeric pair format code
-                const part1 = Math.random().toString(36).substring(2, 6).toUpperCase();
-                const part2 = Math.random().toString(36).substring(2, 6).toUpperCase();
-                
-                codeOutput.innerText = `${part1}-${part2}`;
-                codeOutput.style.display = "block";
-            }, 3500);
-        }
-
-        function varColor(name) {
-            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-        }
-
-        // HYPER-SMOOTH HACKER ENGINE MATRIX ANIMATION
-        const canvas = document.getElementById('matrixEnv');
+        // MATRIX GREEN HACK kODE BACKGROUND ANIMATION ENGINE
+        const canvas = document.getElementById('canvasRain');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const alphabet = "010101010101☠⚡💻☣".split("");
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(-50).map(() => Math.random() * -100);
+        const codes = "0110010101011010☠️☣️⚡⚙️".split("");
+        const font_size = 14;
+        const columns = canvas.width / font_size;
+        const drops = Array(Math.floor(columns)).fill(1);
 
-        function renderMatrixFrame() {
-            ctx.fillStyle = 'rgba(3, 3, 3, 0.05)';
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff0055'; // Pink/Red matrix style
+            ctx.font = font_size + 'px Courier New';
 
-            ctx.font = fontSize + 'px monospace';
+            for(let i = 0; i < drops.length; i++) {
+                const text = codes[Math.floor(Math.random() * codes.length)];
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
 
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
-                ctx.fillStyle = (i % 4 === 0) ? '#00f0ff' : '#00ff66';
-                
-                if (Math.random() > 0.98) ctx.fillStyle = '#ffffff';
+                if(drops[i] * font_size > canvas.height && Math.random() > 0.975)
+                    drops[i] = 0;
 
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i] += 1;
+                drops[i]++;
             }
         }
-
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-        setInterval(renderMatrixFrame, 30);
+        setInterval(drawMatrix, 33);
     </script>
 </body>
 </html>
