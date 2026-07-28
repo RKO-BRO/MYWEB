@@ -487,9 +487,9 @@
                 <h3><i class="fa-solid fa-qrcode"></i> Baileys Pairing Engine</h3>
                 <div class="phone-input-wrap">
                     <span>+94</span>
-                    <input type="text" placeholder="77xxxxxxx">
+                    <input type="text" id="phoneNumber" placeholder="77xxxxxxx">
                 </div>
-                <button class="code-btn" onclick="alert('System Notice: Generating Pairing Session Tokens...')">Get Pairing Code</button>
+                <button class="code-btn" id="getPairCodeBtn">Get Pairing Code</button>
             </div>
 
             <!-- HACKER REAL-TIME SYSTEM CONSOLE LOGS -->
@@ -587,9 +587,9 @@
                 <p style="color: #888; margin-top: 10px;">Connect directly with the main systems development infrastructure logs team.</p>
                 
                 <div class="contact-grid">
-                    <a href="https://t.me/your_telegram" target="_blank" class="contact-item tg"><i class="fa-brands fa-telegram"></i> Telegram Support</a>
-                    <a href="https://wa.me/94771234567" target="_blank" class="contact-item wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp Network</a>
-                    <a href="https://github.com/your_github" target="_blank" class="contact-item gh"><i class="fa-brands fa-github"></i> Developer Github</a>
+                    <a href="https://whatsapp.com/channel/0029VbD43zxAO7RLs9mB6x16" target="_blank" class="contact-item tg"><i class="fa-brands fa-whatsapp"></i> WhatsApp Channel</a>
+                    <a href="https://chat.whatsapp.com/GGhJ1UpxjV60OC71nsSNp4?s=cl&p=a&ilr=1" target="_blank" class="contact-item wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp Group</a>
+                    <a href="https://wa.me/94751590279" target="_blank" class="contact-item gh"><i class="fa-brands fa-whatsapp"></i> Contact Dileeha</a>
                 </div>
             </div>
         </div>
@@ -610,7 +610,7 @@
 
     <footer>
         <div>SECURED TERMINAL INFRASTRUCTURE LAYER // VIPER-RKO PROTOCOLS</div>
-        <div class="dev-badge">DEVELOPER = DILEESHA</div>
+        <div class="dev-badge">DEVELOPER = Ｄɪʟᴇᴇʜᴀ Ｇᴍꜱʜᴀɴ</div>
     </footer>
 
     <script>
@@ -676,6 +676,46 @@
         }
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
         setInterval(drawMatrix, 33);
+
+        // CONNECT BACKEND LINK VIA FETCH API WITHOUT CHANGING OTHER LOGIC
+        document.getElementById('getPairCodeBtn').addEventListener('click', async () => {
+            const phoneInput = document.getElementById('phoneNumber').value.trim();
+            const btn = document.getElementById('getPairCodeBtn');
+            const logConsole = document.getElementById('logConsole');
+
+            if (!phoneInput) {
+                alert('Please enter your phone number.');
+                return;
+            }
+
+            const fullPhoneNumber = '94' + phoneInput;
+
+            try {
+                btn.innerText = 'CONNECTING...';
+                btn.disabled = true;
+
+                if(logConsole) logConsole.innerHTML += `<br>[SERVER] Requesting pair code for +${fullPhoneNumber}...`;
+
+                const response = await fetch(`https://the-viper.onrender.com/code?number=${fullPhoneNumber}`);
+                const data = await response.json();
+
+                if (response.ok && data.code) {
+                    alert(`Your Pairing Code: ${data.code}`);
+                    if(logConsole) logConsole.innerHTML += `<br>[SUCCESS] Pair Code Generated: ${data.code}`;
+                } else {
+                    alert('Failed to get pairing code. Please try again.');
+                    if(logConsole) logConsole.innerHTML += `<br>[ERROR] Server responded with invalid context status.`;
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Could not connect to the automation host server.');
+                if(logConsole) logConsole.innerHTML += `<br>[CRITICAL] Network request failed on client pipeline.`;
+            } finally {
+                btn.innerText = 'GET PAIRING CODE';
+                btn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
