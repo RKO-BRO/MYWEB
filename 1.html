@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAJIRA-MD ULTRA SYSTEM CORE</title>
+    <title>VIPER-RKO CORE INFRASTRUCTURE</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -216,7 +216,7 @@
         .hero-banner h1 { font-size: 3rem; margin-bottom: 10px; letter-spacing: 3px; text-shadow: 0 0 15px var(--neon-red); }
         .hero-banner p { color: #bbb; margin-bottom: 30px; line-height: 1.6; }
 
-        /* 1. LIVE ANALYTICS (ACTIVE BOTS COUNT MODULE) */
+        /* BOTS COUNT MODULE */
         .analytics-container {
             background: rgba(10, 5, 5, 0.85);
             border: 1px solid var(--neon-red);
@@ -232,7 +232,6 @@
         .analytics-info .counter { font-size: 2.8rem; font-weight: bold; color: #fff; text-shadow: 0 0 10px var(--neon-red); }
         .analytics-info .live-dot { display: inline-block; width: 10px; height: 10px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66; margin-right: 8px; }
         
-        /* Mini Vector Graph effect */
         .graph-vector { width: 120px; height: 40px; stroke: var(--neon-red); stroke-width: 3; fill: none; }
 
         .pair-box {
@@ -259,7 +258,6 @@
         }
         .code-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: var(--glow-cyan); }
 
-        /* 3. AVAILABLE COMMANDS TERMINAL GRID */
         .section-heading { font-size: 1.8rem; color: #fff; margin: 50px 0 25px 0; border-left: 4px solid var(--neon-red); padding-left: 15px; text-transform: uppercase; }
         
         .commands-grid {
@@ -276,13 +274,11 @@
         .command-card span { color: #555; font-size: 0.8rem; }
         .command-card:hover { border-color: var(--neon-cyan); background: rgba(0, 240, 255, 0.05); transform: translateY(-3px); }
 
-        /* 4. HACKER SYSTEM LOG CONSOLE */
         .system-log-console {
             background: #000; border: 1px dashed rgba(255, 0, 85, 0.3); border-radius: 8px; padding: 20px;
             font-family: monospace; color: #00ff66; font-size: 0.85rem; line-height: 1.6; height: 150px; overflow-y: hidden; margin-bottom: 40px;
         }
 
-        /* 5. VIDEO TUTORIAL NODE */
         .video-node {
             background: var(--card-bg); border: 1px solid #222; border-radius: 16px; padding: 25px; margin-bottom: 40px; text-align: center;
         }
@@ -292,7 +288,6 @@
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* 6. USER REVIEW SYSTEM */
         .review-box {
             background: var(--card-bg); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 16px; padding: 30px; max-width: 600px; margin: 0 auto 40px auto;
         }
@@ -303,7 +298,7 @@
         .review-form input:focus, .review-form textarea:focus { border-color: var(--neon-cyan); }
         .review-submit { background: var(--neon-cyan); color: #000; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* 2. CONTACT US & STORE SYSTEMS */
+        /* STORE & CONTACT */
         .store-header { text-align: center; margin-bottom: 40px; }
         .store-header h2 { font-size: 2.5rem; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
         
@@ -327,7 +322,103 @@
         .contact-item.wa:hover { border-color: #25d366; box-shadow: 0 0 12px #25d366; }
         .contact-item.gh:hover { border-color: #ffffff; box-shadow: 0 0 12px #ffffff; }
 
-        footer { margin-top: 60px; text-align: center; padding: 30px; border-top: 1px solid #111; color: #444; font-size: 0.85rem; }
+        /* =========================================================
+           ADVANCED CYBER RADAR SCANNER COMPONENT (BOTTOM COMPONENT)
+           ========================================================= */
+        .radar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 60px 0 20px 0;
+            padding: 20px;
+        }
+        .radar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-cyan);
+            margin-bottom: 20px;
+        }
+        .radar-screen {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(0, 0, 0, 0.8) 80%);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: var(--glow-cyan);
+            overflow: hidden;
+        }
+        /* Radar Circular Grid rings */
+        .radar-screen::before {
+            content: "";
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            border: 1px dashed rgba(0, 240, 255, 0.25);
+            border-radius: 50%;
+        }
+        .radar-screen::after {
+            content: "";
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 50%;
+        }
+        /* Crosshairs axis lines */
+        .radar-axis-h { position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(0, 240, 255, 0.2); }
+        .radar-axis-v { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: rgba(0, 240, 255, 0.2); }
+        
+        /* Rotating Sweep arm */
+        .radar-sweep {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.4) 0deg, rgba(0, 240, 255, 0) 90deg);
+            border-radius: 50%;
+            animation: radarRotate 4s linear infinite;
+            transform-origin: center center;
+        }
+        /* Blip target dots */
+        .radar-blip {
+            position: absolute; width: 6px; height: 6px; background: #fff; border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--neon-cyan); opacity: 0;
+            animation: blipFlash 4s infinite ease-in-out;
+        }
+        .blip-1 { top: 40px; left: 120px; animation-delay: 1.2s; }
+        .blip-2 { top: 110px; left: 50px; animation-delay: 2.8s; }
+
+        @keyframes radarRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes blipFlash {
+            0%, 15% { opacity: 1; transform: scale(1.2); }
+            45%, 100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 30px; 
+            border-top: 2px solid var(--neon-red); 
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 -5px 20px rgba(255, 0, 85, 0.2);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+        }
+        .dev-badge {
+            margin-top: 10px;
+            display: inline-block;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 4px 15px;
+            border-radius: 4px;
+            background: rgba(0, 240, 255, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -356,7 +447,7 @@
 
     <!-- MAIN NAVBAR MODULE -->
     <nav class="top-navbar">
-        <div class="logo">VAJIRA-<span>MD</span></div>
+        <div class="logo">VIPER-<span>RKO</span></div>
         <button class="menu-toggle-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i> NAVIGATION</button>
     </nav>
 
@@ -376,18 +467,17 @@
         <div id="homePage" class="view-section active-view">
             
             <div class="hero-banner">
-                <h1>VAJIRA-MD AUTOMATION</h1>
+                <h1>VIPER-RKO AUTOMATION</h1>
                 <p>Advanced Architectural Multi-Device WhatsApp Engineering Client Hub.</p>
                 <button class="code-btn" style="width:auto; padding: 12px 35px; border-color:var(--neon-red); color:var(--neon-red);" onclick="document.getElementById('pairEngine').scrollIntoView({behavior: 'smooth'})">INITIALIZE CORE INJECTION</button>
             </div>
 
-            <!-- MODULE 1: LIVE USER COUNTER ENGINE -->
+            <!-- LIVE USER COUNTER ENGINE -->
             <div class="analytics-container">
                 <div class="analytics-info">
                     <h4><span class="live-dot"></span> Active Core Bots</h4>
                     <div class="counter" id="botCounter">3,832</div>
                 </div>
-                <!-- Vector Line Wave Graph Grid Shape -->
                 <svg class="graph-vector" viewBox="0 0 100 40">
                     <path d="M0,35 Q15,5 30,28 T60,15 T90,8 T100,5" />
                 </svg>
@@ -402,15 +492,15 @@
                 <button class="code-btn" onclick="alert('System Notice: Generating Pairing Session Tokens...')">Get Pairing Code</button>
             </div>
 
-            <!-- MODULE 4: HACKER REAL-TIME SYSTEM CONSOLE LOGS -->
+            <!-- HACKER REAL-TIME SYSTEM CONSOLE LOGS -->
             <div class="section-heading">System Core Log Status</div>
             <div class="system-log-console" id="logConsole">
-                [SYSTEM] Initializing Vajira-MD Shell Kernel Protocol...<br>
+                [SYSTEM] Initializing VIPER-RKO Shell Kernel Protocol...<br>
                 [SECURE] Matrix Canvas Context Layer Active.<br>
                 [SERVER] Connection established successfully with Node Session Cluster.
             </div>
 
-            <!-- MODULE 3: INTERACTIVE AVAILABLE COMMANDS TERMINAL -->
+            <!-- INTERACTIVE AVAILABLE COMMANDS TERMINAL -->
             <div class="section-heading">Available Core Commands</div>
             <div class="commands-grid">
                 <div class="command-card">
@@ -435,17 +525,16 @@
                 </div>
             </div>
 
-            <!-- MODULE 5: DYNAMIC VIDEO TUTORIAL EM-BED NODE -->
+            <!-- DYNAMIC VIDEO TUTORIAL EM-BED NODE -->
             <div class="video-node">
                 <div class="section-heading" style="margin:0 0 10px 0; border:none;">Video Deployment Tutorial</div>
                 <p style="color:#777; font-size:0.9rem;">Watch our structural step-by-step complete deployment setup guide.</p>
                 <div class="video-wrapper">
-                    <!-- Embed Youtube or Custom Explainer Framework Video -->
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <!-- MODULE 6: LIVE USER REVIEW CONTEXT PANEL -->
+            <!-- LIVE USER REVIEW CONTEXT PANEL -->
             <div class="review-box">
                 <div class="section-heading" style="margin:0 0 15px 0; border:none; text-align:center; color:var(--neon-cyan);">System Core Reviews</div>
                 <div style="text-align:center;">
@@ -505,10 +594,23 @@
             </div>
         </div>
 
+        <!-- DYNAMIC NEON RADAR SCANNER MODULE -->
+        <div class="radar-section">
+            <div class="radar-title">System Perimeter Radar Scan</div>
+            <div class="radar-screen">
+                <div class="radar-axis-h"></div>
+                <div class="radar-axis-v"></div>
+                <div class="radar-sweep"></div>
+                <div class="radar-blip blip-1"></div>
+                <div class="radar-blip blip-2"></div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <p>SECURED TERMINAL INFRASTRUCTURE LAYER // VAJIRA-MD PROTOCOLS &copy; 2026</p>
+        <div>SECURED TERMINAL INFRASTRUCTURE LAYER // VIPER-RKO PROTOCOLS</div>
+        <div class="dev-badge">DEVELOPER = DILEESHA</div>
     </footer>
 
     <script>
@@ -534,7 +636,6 @@
         setInterval(() => {
             const counterElement = document.getElementById('botCounter');
             let currentCount = parseInt(counterElement.innerText.replace(',', ''));
-            // Random fluctuations up or down
             currentCount += Math.floor(Math.random() * 5) - 2;
             counterElement.innerText = currentCount.toLocaleString();
         }, 4000);
@@ -549,9 +650,11 @@
         ];
         setInterval(() => {
             const consoleBox = document.getElementById('logConsole');
-            const randomMsg = consoleMsgs[Math.floor(Math.random() * consoleMsgs.length)];
-            consoleBox.innerHTML += `<br>${randomMsg}`;
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+            if (consoleBox) {
+                const randomMsg = consoleMsgs[Math.floor(Math.random() * consoleMsgs.length)];
+                consoleBox.innerHTML += `<br>${randomMsg}`;
+                consoleBox.scrollTop = consoleBox.scrollHeight;
+            }
         }, 5000);
 
         // HYPER MATRIX SCREEN CODE RAIN ENGINE
