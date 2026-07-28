@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIPER-RKO | CYBER HUB</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-green: #00ff66;
+            --neon-cyan: #00f0ff;
+            --bg-dark: #030303;
+            --card-bg: rgba(10, 12, 10, 0.85);
+            --glow-green: 0 0 15px rgba(0, 255, 102, 0.3);
+            --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Animated Background Canvas */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* Tech Scanline Overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+            z-index: 9999;
+            pointer-events: none;
+            background-size: 100% 4px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            transition: all 0.5s ease;
+        }
+
+        /* Active View Systems */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: terminalFade 0.6s ease forwards;
+        }
+
+        @keyframes terminalFade {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            border-radius: 16px;
+            box-shadow: var(--glow-green);
+            backdrop-filter: blur(10px);
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--neon-green);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.95rem;
+        }
+
+        .category-title {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 40px 0 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cyan-title { color: var(--neon-cyan); }
+        .green-title { color: var(--neon-green); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* MAIN APP CARDS */
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cyber-card.cyan-theme:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-5px);
+        }
+
+        .cyber-card.green-theme:hover {
+            border-color: var(--neon-green);
+            box-shadow: var(--glow-green);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+        }
+
+        .card-header h3 { font-size: 1.4rem; font-weight: 700; }
+        .cyan-theme .card-header h3 { text-shadow: 0 0 8px var(--neon-cyan); }
+        .green-theme .card-header h3 { text-shadow: 0 0 8px var(--neon-green); }
+
+        .card-icon { font-size: 1.8rem; }
+        .cyan-theme .card-icon { color: var(--neon-cyan); }
+        .green-theme .card-icon { color: var(--neon-green); }
+
+        .card-desc { color: #aaa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
+
+        /* FEATURES LIST (Vajira-MD Architecture) */
+        .features-list { margin-bottom: 25px; list-style: none; }
+        .features-list li { font-size: 0.9rem; color: #d1d1d1; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .cyan-theme .features-list li i { color: var(--neon-cyan); }
+        .green-theme .features-list li i { color: var(--neon-green); }
+
+        .status-display { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+        .cyan-theme .status-display { color: var(--neon-cyan); }
+        .green-theme .status-display { color: var(--neon-green); }
+
+        /* BUTTON INTERACTIVITY */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .cyan-theme .action-btn { border: 1px solid var(--neon-cyan); color: var(--neon-cyan); }
+        .cyan-theme .action-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 10px var(--neon-cyan); }
+
+        .green-theme .action-btn { border: 1px solid var(--neon-green); color: var(--neon-green); }
+        .green-theme .action-btn:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 10px var(--neon-green); }
+
+        /* =========================================================
+           ADVANCED DYNAMIC INTERACTIVE TERMINAL (PAIRING PANEL)
+           ========================================================= */
+        .pairing-panel {
+            background: rgba(5, 7, 5, 0.95);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px; left: 20px;
+            background: transparent;
+            border: 1px solid #ff3333;
+            color: #ff3333;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #ff3333; color: #000; }
+
+        .pairing-panel h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            letter-spacing: 2px;
+        }
+
+        .pairing-panel p.subtitle {
+            color: #77aacc;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background: #000;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            outline: none;
+            font-family: monospace;
+        }
+
+        .input-group input:focus {
+            box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Live Response Logic Modules */
+        .terminal-console {
+            background: #000;
+            border: 1px dashed rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .code-output {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: #fff;
+            text-shadow: 0 0 12px var(--neon-cyan);
+            display: none;
+        }
+
+        /* Loading Spinner Animation */
+        .spinner {
+            display: none;
+            border: 4px solid rgba(0, 240, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: var(--neon-cyan);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #555;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas background node code rain layer -->
+    <canvas id="matrixEnv"></canvas>
+
+    <div class="container">
+
+        <!-- ==========================================
+             VIEW 1: THE CORE MARKETPLACE DASHBOARD
+             ========================================== -->
+        <div id="marketView" class="view-section active">
+            <header>
+                <h1>VIPER-RKO</h1>
+                <p>Architectural Custom WhatsApp Automation Framework</p>
+            </header>
+
+            <!-- BOTS ENGINE PANEL -->
+            <div class="category-title cyan-title">
+                <i class="fa-solid fa-terminal"></i> <h2>Viper Official Bots</h2>
+            </div>
+            
+            <div class="grid">
+                <!-- BOT 1 -->
+                <div class="cyber-card cyan-theme">
+                    <div>
+                        <div class="card-header">
+                            <h3>THE_VIPER-MD</h3>
+                            <i class="fa-solid fa-robot card-icon"></i>
+                        </div>
+                        <p class="card-desc">Advanced fully-automated multi-device module core system.</p>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-circle-check"></i> 250+ Functional Commands</li>
+                            <li><i class="fa-solid fa-circle-check"></i> AI Chat Engine Injected</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Cloud Storage Connected</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Absolute Anti-Ban Architecture</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="status-display">METHOD: PAIR ENGINE</div>
+                        <!-- JavaScript Trigger Click Event -->
+                        <button class="action-btn" onclick="openPairingGate('THE_VIPER-MD')">
+                            Initialize Pairing <i class="fa-solid fa-code-branch"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BOT 2 -->
+                <div class="cyber-card cyan-theme">
+                    <div>
+                        <div class="card-header">
+                            <h3>VIPER-MINI</h3>
+                            <i class="fa-solid fa-microchip card-icon"></i>
+                        </div>
+                        <p class="card-desc">Ultra lightweight, optimized build for minimal process engines.</p>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Ultra Low RAM Utilization</li>
+                            <li><i class="fa-solid fa-circle-check"></i> 24/7 Persistent Up-time</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Core Utility Toolkit Included</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Single Script Control</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="status-display">METHOD: PAIR ENGINE</div>
+                        <button class="action-btn" onclick="openPairingGate('VIPER-MINI')">
+                            Initialize Pairing <i class="fa-solid fa-code-branch"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CODE BASES PANEL -->
+            <div class="category-title green-title">
+                <i class="fa-solid fa-code"></i> <h2>Developer Bot Bases</h2>
+            </div>
+            <div class="grid">
+                <div class="cyber-card green-theme">
+                    <div>
+                        <div class="card-header">
+                            <h3>ViperBase-X Core</h3>
+                            <i class="fa-solid fa-layer-group card-icon"></i>
+                        </div>
+                        <p class="card-desc">Clean structured modular Javascript framework layout for automation.</p>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Clean JavaScript Modules</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Event Emitter Control</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Quick Session Save</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="status-display">PRICE: LKR 2,000.00</div>
+                        <button class="action-btn" onclick="alert('System Notice: Base source purchasing will be configured soon!')">
+                            Get Source Code <i class="fa-solid fa-lock-open"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 2: DYNAMIC PAIRING TERMINAL CONTROL
+             ========================================== -->
+        <div id="pairingView" class="view-section">
+            <div class="pairing-panel">
+                <button class="back-btn" onclick="closePairingGate()"><i class="fa-solid fa-arrow-left"></i> ESCAPE</button>
+                
+                <h2 id="targetBotTitle">BOT_NAME</h2>
+                <p class="subtitle">ENTER TARGET PHONE NUMBER WITH COUNTRY CODE TO INJECT SESSION</p>
+
+                <div class="input-group">
+                    <label for="phoneNumber">PHONE NUMBER (e.g., 94771234567)</label>
+                    <input type="text" id="phoneNumber" placeholder="94xxxxxxxx" autocomplete="off">
+                </div>
+
+                <button class="action-btn" style="border: 1px solid var(--neon-cyan); color: var(--neon-cyan);" onclick="generatePairCodeProcess()">
+                    SUBMIT TO SYSTEM CORE
+                </button>
+
+                <div class="terminal-console">
+                    <div id="terminalStatus" style="color: #666; font-size: 0.9rem;">AWAITING SECURITY INJECTION...</div>
+                    <div class="spinner" id="loadingSpinner"></div>
+                    <div class="code-output" id="finalPairCode">XXXX-XXXX</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>CORE GATEWAY SECURED // PROTOCOL RKO v4.0 // &copy; 2026</p>
+        </footer>
+
+    </div>
+
+    <!-- Core Interactive Client Script Architecture -->
+    <script>
+        // SINGLE-PAGE ROUTING LOGIC
+        function openPairingGate(botName) {
+            document.getElementById('marketView').classList.remove('active');
+            document.getElementById('pairingView').classList.add('active');
+            document.getElementById('targetBotTitle').innerText = `[ ${botName} PAIR PROTOCOL ]`;
+            
+            // Clear previous session states
+            document.getElementById('phoneNumber').value = "";
+            document.getElementById('finalPairCode').style.display = "none";
+            document.getElementById('terminalStatus').style.display = "block";
+            document.getElementById('terminalStatus').innerText = "AWAITING SECURITY INJECTION...";
+            document.getElementById('terminalStatus').style.color = "#666";
+        }
+
+        function closePairingGate() {
+            document.getElementById('pairingView').classList.remove('active');
+            document.getElementById('marketView').classList.add('active');
+        }
+
+        // SIMULATED INTERACTIVE PAIR INTERFACE
+        function generatePairCodeProcess() {
+            const numInput = document.getElementById('phoneNumber').value.trim();
+            const statusText = document.getElementById('terminalStatus');
+            const spinner = document.getElementById('loadingSpinner');
+            const codeOutput = document.getElementById('finalPairCode');
+
+            if(!numInput || numInput.length < 8) {
+                statusText.innerText = "ERROR: INVALID PROTOCOL TARGET IDENTIFIER (NUMBER TOO SHORT).";
+                statusText.style.color = "#ff3333";
+                codeOutput.style.display = "none";
+                return;
+            }
+
+            // Begin dynamic UI state transitions
+            statusText.innerText = "CONNECTING TO WHATSAPP SERVER CORE VIA BAILEYS...";
+            statusText.style.color = varColor('--neon-cyan');
+            spinner.style.display = "block";
+            codeOutput.style.display = "none";
+
+            // State step 2: 1.5 seconds later
+            setTimeout(() => {
+                statusText.innerText = "GENERATING PRIVATE ENCRYPTED SESSION KEY & PAIR PATTERN...";
+            }, 1500);
+
+            // State step 3: Final Resolution (3.5 seconds total)
+            setTimeout(() => {
+                spinner.style.display = "none";
+                statusText.style.display = "none";
+                
+                // Generates a mock professional terminal alphanumeric pair format code
+                const part1 = Math.random().toString(36).substring(2, 6).toUpperCase();
+                const part2 = Math.random().toString(36).substring(2, 6).toUpperCase();
+                
+                codeOutput.innerText = `${part1}-${part2}`;
+                codeOutput.style.display = "block";
+            }, 3500);
+        }
+
+        function varColor(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+
+        // HYPER-SMOOTH HACKER ENGINE MATRIX ANIMATION
+        const canvas = document.getElementById('matrixEnv');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const alphabet = "010101010101☠⚡💻☣".split("");
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(-50).map(() => Math.random() * -100);
+
+        function renderMatrixFrame() {
+            ctx.fillStyle = 'rgba(3, 3, 3, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillStyle = (i % 4 === 0) ? '#00f0ff' : '#00ff66';
+                
+                if (Math.random() > 0.98) ctx.fillStyle = '#ffffff';
+
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i] += 1;
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        setInterval(renderMatrixFrame, 30);
+    </script>
+</body>
+</html>
